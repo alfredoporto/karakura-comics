@@ -8,9 +8,9 @@ export default makeStyles(() => ({
       height: 0,
       paddingTop: '56.25%', //16:9
     },
-    cardActions: {
+    CardActions: {
       display: 'flex',
-      justifyContent: 'flex-end',
+      justifyContent: 'space-between',
     },
     cardContent: {
       display: 'flex',
