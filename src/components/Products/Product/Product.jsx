@@ -13,7 +13,7 @@ const Product = ({ product }) => {
             <CardMedia className={classes.media} image={product.image} title={product.name} />
             <CardContent>
                 <div className={classes.cardContent}>
-                    <Typography variant="h5" gutterBottom>
+                    <Typography variant="h6" gutterBottom>
                         {product.name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
