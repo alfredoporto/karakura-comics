@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Typography, Button, Grid } from '@material-ui/core';
+import Navbar from '../Navbar/Navbar';
 import { mergeClasses } from '@material-ui/styles';
 
 const Cart = () => {
@@ -18,11 +19,14 @@ const Cart = () => {
     )
 
     return (
-        <Container>
-            <div className={mergeClasses.toolbar} />
-            <Typography className={mergeClasses.title} variant="h4"> Carrito de compras</Typography>
-            {isEmpty ? <GenerateEmptyCart /> : <GenerateFilledCart />}
-        </Container>
+        <>
+            <Navbar />
+            <Container>
+                <div className={mergeClasses.toolbar} />
+                <Typography className={mergeClasses.title} variant="h4"> Carrito de compras</Typography>
+                {isEmpty ? <GenerateEmptyCart /> : <GenerateFilledCart />}
+            </Container>
+        </>
     )
 }
 
