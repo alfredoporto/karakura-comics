@@ -23,7 +23,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 50vh;
 }
 
 .swiper {
@@ -49,4 +49,5 @@ body {
   top: 40vh;
   left: 30px;
   width: 200px;
+  color: white
 }

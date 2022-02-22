@@ -4,7 +4,7 @@ export default makeStyles(() => ({
   root: {
     width: '300px',
     margin: '30px 0px',
-    backgroundColor: 'white'
+    backgroundColor: '#000e44'
   },
   media: {
     height: 0,
@@ -18,4 +18,7 @@ export default makeStyles(() => ({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  label:{
+    color: 'white'
+  }
 }));
