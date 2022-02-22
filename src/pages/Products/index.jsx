@@ -1,9 +1,8 @@
 import React from "react";
-import { Grid } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 
-import Product from './Product/Product';
-import Navbar from '../Navbar/Navbar';
-import useStyles from './styles';
+import Product from '../../components/Product/Product';
+import Sidebar from '../../components/Sidebar';
 
 const dummyProducts = [
     { id: 1, name: 'Steel Ball Run 01', editorial: 'Ivrea', price: 60, image: 'https://i1.whakoom.com/large/37/3f/ac9dad6b26a845b086b1e77d46b12631.jpg' },
@@ -18,23 +17,16 @@ const dummyProducts = [
 ];
 
 const Products = () => {
-    const classes = useStyles();
-    return (
-        <>
-            <Navbar />
-            <main className={classes.content}>
 
-                {/* va a anadir el height, la cantida exacta de pixels que el navbar tiene; va a empujar un poquito abajo los productos */}
-                <div className={classes.toolbar} />
-                <Grid container justify="center" spacing={4}>
-                    {dummyProducts.map((product) => (
-                        <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-                            <Product product={product} />
-                        </Grid>
-                    ))}
+    return (
+        <Grid container>
+            <Grid item xs={2}><Sidebar /></Grid>
+            <Grid item xs={10} style={{marginTop: '15px', backgroundColor: 'white'}}>
+                <Grid container direction="row" justifyContent="space-between">
+                    {dummyProducts.map((product) => <Grid item xs={4} sx={{ mb: 2 }}><Product product={product} /></Grid>)}
                 </Grid>
-            </main>
-        </>
+            </Grid>
+        </Grid>
     )
 
 }

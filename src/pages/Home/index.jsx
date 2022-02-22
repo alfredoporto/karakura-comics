@@ -24,36 +24,30 @@ import { EffectCoverflow, Pagination } from "swiper";
 export default function Home() {
     return (
         <>
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static">
-                    <Toolbar className="header">
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            Karakura
-                        </Typography>
-                        <Box display={'flex'} justifyContent={'space-between'}>
-                            <IconButton
-                                size="large"
-                                aria-label="show 17 new notifications"
-                                color="inherit"
-                            >
-                                <Badge badgeContent={3} color="error">
-                                    <NotificationsIcon />
-                                </Badge>
-                            </IconButton>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="primary-search-account-menu"
-                                aria-haspopup="true"
-                                color="inherit"
-                                component={Link} 
-                                to={"/products"}
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                        </Box>
-                    </Toolbar>
-                </AppBar>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Typography variant='body2'>Karakura</Typography>
+                <Box display={'flex'} justifyContent={'flex-end'} sx={{ mt: 1 }}>
+                    <IconButton
+                        size="large"
+                        aria-label="show 17 new notifications"
+                        color="inherit"
+                    >
+                        <Badge badgeContent={3} color="error">
+                            <NotificationsIcon style={{color: '#070C9F', fontSize: '35px'}}/>
+                        </Badge>
+                    </IconButton>
+                    <IconButton
+                        size="large"
+                        aria-label="account of current user"
+                        aria-controls="primary-search-account-menu"
+                        aria-haspopup="true"
+                        color="inherit"
+                        component={Link}
+                        to={"/products"}
+                    >
+                        <AccountCircle style={{color: '#070C9F', fontSize: '35px'}}/>
+                    </IconButton>
+                </Box>
             </Box>
             <Box className="main">
                 <Swiper
@@ -100,6 +94,7 @@ export default function Home() {
                     </SwiperSlide>
                 </Swiper>
             </Box>
+            <Typography className="label">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Typography>
         </>
     );
 }
