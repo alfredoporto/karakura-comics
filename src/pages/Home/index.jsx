@@ -25,15 +25,15 @@ export default function Home() {
     return (
         <>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant='body2'>Karakura</Typography>
-                <Box display={'flex'} justifyContent={'flex-end'} sx={{ mt: 1 }}>
+                <Box><img width='180px' height='180px' src="./Images/Karakura-2.gif" /></Box>
+                <Box display={'flex'} justifyContent={'flex-end'} style={{ marginTop: '-45px'}}>
                     <IconButton
                         size="large"
                         aria-label="show 17 new notifications"
                         color="inherit"
                     >
                         <Badge badgeContent={3} color="error">
-                            <NotificationsIcon style={{color: '#070C9F', fontSize: '35px'}}/>
+                            <NotificationsIcon style={{color: '#3DADFF', fontSize: '30px'}}/>
                         </Badge>
                     </IconButton>
                     <IconButton
@@ -45,7 +45,7 @@ export default function Home() {
                         component={Link}
                         to={"/products"}
                     >
-                        <AccountCircle style={{color: '#070C9F', fontSize: '35px'}}/>
+                        <AccountCircle style={{color: '#3DADFF', fontSize: '30px'}}/>
                     </IconButton>
                 </Box>
             </Box>
@@ -94,7 +94,6 @@ export default function Home() {
                     </SwiperSlide>
                 </Swiper>
             </Box>
-            <Typography className="label">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Typography>
         </>
     );
 }

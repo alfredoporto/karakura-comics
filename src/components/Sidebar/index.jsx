@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -9,22 +10,22 @@ import LocalMallIcon from '@material-ui/icons/LocalMall';
 export default function Sidebar() {
 
     return (
-        <Box sx={{ height: '100%', backgroundColor: '#070C9F', padding: '0px 10px', mr: 3 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'center', py: 3, color: 'white' }}>
-                <Typography>Karakura</Typography>
+        <Box sx={{ height: '100%', backgroundColor: 'white', padding: '0px 10px', mr: 3 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', color: 'white' }}>
+            <Box><img width='130px' height='130px' src="./Images/Karakura-2.gif" /></Box>
             </Box>
             <Divider />
-            <Box sx={{ backgroundColor: 'white', borderRadius: '8px', display: 'flex', py: 1, px: 1, my: 1 }}>
-                <AssignmentIcon style={{ marginRight: '5px', color: '#070C9F' }} />
+            <Box component={Link} to={'/products'} sx={{ backgroundColor: '#3DADFF',color:'white', borderRadius: '8px', display: 'flex', py: 1, px: 1, my: 1, textDecoration: 'none' }}>
+                <AssignmentIcon style={{ marginRight: '5px', color: 'white' }} />
                 <Typography>Productos</Typography>
             </Box>
             <Divider />
-            <Box sx={{ borderRadius: '8px', display: 'flex', color: 'white', py: 1, px: 1, my: 1 }}>
+            <Box component={Link} to={'/shopping'} sx={{ borderRadius: '8px', display: 'flex', color: '#3DADFF', py: 1, px: 1, my: 1, textDecoration: 'none' }}>
                 <LocalMallIcon style={{ marginRight: '5px' }} />
                 <Typography>Carrito</Typography>
             </Box>
             <Divider />
-            <Box sx={{ display: 'flex', mt: '150px', color: 'white' }}>
+            <Box component={Link} to={'/'} sx={{ display: 'flex', mt: '50vh', color: '#3DADFF', textDecoration: 'none' }}>
                 <PowerSettingsNewIcon style={{ marginRight: '5px', fontSize: '25px' }} />
                 <Typography sx={{ mt: 1 }}>Cerrar sesión</Typography>
             </Box>

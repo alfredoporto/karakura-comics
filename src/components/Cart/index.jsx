@@ -44,7 +44,7 @@ export default function ShoppingCar() {
             </Grid>
             <Grid container className={classes.header}>
                 <Grid item xs={9}><Typography className={classes.label}>TOTAL A PAGAR</Typography></Grid>
-                <Grid item xs={2}><Button variant='contained'>Pagar</Button></Grid>
+                <Grid item xs={2}><Button variant='contained' style={{backgroundColor: '#000e44', color: 'white'}}>Pagar</Button></Grid>
             </Grid>
         </Grid>
     )
