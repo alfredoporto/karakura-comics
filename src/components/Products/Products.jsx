@@ -1,8 +1,10 @@
-import React from "react";
-import { Grid } from '@material-ui/core';
+import React, { useContext } from "react";
+import { Button, Grid, Typography } from '@material-ui/core';
 
 import Product from './Product/Product';
 import useStyles from './styles';
+import { UserContext } from '../../UserContext';
+import { login } from '../../services/login';
 
 const dummyProducts = [
     { id: 1, name: 'Steel Ball Run 01', editorial: 'Ivrea', price: 60, image: 'https://i1.whakoom.com/large/37/3f/ac9dad6b26a845b086b1e77d46b12631.jpg' },
@@ -17,11 +19,33 @@ const dummyProducts = [
 ];
 
 const Products = () => {
+    const { user, setUser } = useContext(UserContext);
     const classes = useStyles();
+
+
+
     return (
         <main className={classes.content}>
             {/* va a anadir el height, la cantida exacta de pixels que el navbar tiene; va a empujar un poquito abajo los productos */}
+
             <div className={classes.toolbar} />
+            <Typography variant="h6">
+                {JSON.stringify(user, null, 2)}
+            </Typography>
+            {user ? (
+                <Button variant="outlined" onClick={() => {
+                    // llamar la backend el logout
+                    setUser(null)
+                }}>logout</Button>
+            ) : (
+                <Button variant="outlined" onClick={async () => {
+                    const user = await login();
+                    setUser(user);
+                }}>Log In
+                </Button>
+            )
+            }
+
             <Grid container justify="center" spacing={4}>
                 {dummyProducts.map((product) => (
                     <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
@@ -29,9 +53,8 @@ const Products = () => {
                     </Grid>
                 ))}
             </Grid>
-        </main>
+        </main >
     )
-
 }
 
 export default Products;
