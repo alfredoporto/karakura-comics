@@ -1,39 +1,30 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
+import { EffectCoverflow, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-
 import "./styles.css";
 
-// import required modules
-import { EffectCoverflow, Pagination } from "swiper";
-
 export default function Home() {
+
     return (
         <>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Box><img width='180px' height='180px' src="./Images/Karakura-2.gif" /></Box>
-                <Box display={'flex'} justifyContent={'flex-end'} style={{ marginTop: '-45px'}}>
+                <Box><img width='180px' height='180px' src="./Images/Karakura.gif" /></Box>
+                <Box display={'flex'} justifyContent={'flex-end'} style={{ marginTop: '-45px' }}>
                     <IconButton
                         size="large"
                         aria-label="show 17 new notifications"
                         color="inherit"
                     >
                         <Badge badgeContent={3} color="error">
-                            <NotificationsIcon style={{color: '#3DADFF', fontSize: '30px'}}/>
+                            <NotificationsIcon style={{ color: 'white', fontSize: '30px' }} />
                         </Badge>
                     </IconButton>
                     <IconButton
@@ -45,7 +36,7 @@ export default function Home() {
                         component={Link}
                         to={"/products"}
                     >
-                        <AccountCircle style={{color: '#3DADFF', fontSize: '30px'}}/>
+                        <AccountCircle style={{ color: 'white', fontSize: '30px' }} />
                     </IconButton>
                 </Box>
             </Box>
@@ -66,31 +57,46 @@ export default function Home() {
                     className="mySwiper"
                 >
                     <SwiperSlide>
-                        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                        <img src="./Images/Login/1.jpeg" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                        <img src="./Images/Login/2.jpeg" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                        <img src="./Images/Login/3.jpeg" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                        <img src="./Images/Login/4.jpeg" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                        <img src="./Images/Login/5.jpeg" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                        <img src="./Images/Login/6.jpeg" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                        <img src="./Images/Login/7.jpeg" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                        <img src="./Images/Login/8.jpeg" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                        <img src="./Images/Login/9.jpeg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img src="./Images/Login/10.jpeg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img src="./Images/Login/11.jpeg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img src="./Images/Login/12.jpeg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img src="./Images/Login/13.jpeg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img src="./Images/Login/14.jpeg" />
                     </SwiperSlide>
                 </Swiper>
             </Box>

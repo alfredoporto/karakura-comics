@@ -6,7 +6,8 @@ export default makeStyles(() => ({
         justifyContent: 'space-between'
     },
     root:{
-        marginTop: '25px'
+        marginTop: '25px',
+        color: 'white'
     },
     label: {
         color: 'white',
@@ -19,7 +20,7 @@ export default makeStyles(() => ({
         color: 'red'
     },
     divider: {
-        width: '100%'
-        
+        width: '100%',
+        backgroundColor: 'white'
     }
 }));

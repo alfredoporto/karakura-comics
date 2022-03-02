@@ -1,46 +1,33 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-/*
-import Products from './components/Products/Products';
-import Navbar from './components/Navbar/Navbar';
-*/
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Shoping from "./pages/Shoping";
-import { commerce } from "./services/commerce";
-
-{
-  /* ticket: implementar react router, llamar a la API de Commerce */
-}
+import { shoppingContext } from "./hook/shopping";
 
 const App = () => {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState({});
+  const [shopping, setShopping] = useState([]);
 
-  const getProducts = async () => {
-    const { data } = await commerce.products.list();
-    setProducts(data);
+  const addProducts = (item) => {
+    console.log("entro", shopping);
+    setShopping((currentShopping) => [...currentShopping, item]);
   };
-  {
-    /* Ni bien se cargue el componente en el DOM ejecutara getProducts */
-  }
-  useEffect(() => {
-    getProducts();
-    {
-      /* Al pasarle un [] le digo a useEffect que solo quiero que lo ejecute al montar en el DOM, sino con cada update estaria pidiendo
-         los productos de la API */
-    }
-    console.log(products);
-  }, []);
+
+  const removeProducts = (item) => {
+    console.log("entro", shopping);
+    setShopping((currentShopping) => currentShopping.filter((element) => element.id !== item.id ));
+  };
 
   return (
-    <Router>
+    <shoppingContext.Provider value={{ shopping, addProducts, removeProducts }}>
+      <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/shopping" element={<Shoping />} />
         </Routes>
-    </Router>
+      </Router>
+    </shoppingContext.Provider>
   );
 };
 

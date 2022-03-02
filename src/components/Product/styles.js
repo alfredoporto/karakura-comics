@@ -4,7 +4,7 @@ export default makeStyles(() => ({
   root: {
     width: '300px',
     margin: '30px 0px',
-    backgroundColor: '#000e44'
+    backgroundColor: 'white'
   },
   media: {
     height: 0,
@@ -19,6 +19,6 @@ export default makeStyles(() => ({
     justifyContent: 'space-between',
   },
   label:{
-    color: 'white'
+    color: 'black'
   }
 }));

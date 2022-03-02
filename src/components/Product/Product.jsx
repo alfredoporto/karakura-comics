@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Card, CardMedia, CardContent, CardActions, Typography, IconButton, Chip, Collapse, Box, Grid } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import { ShoppingCart, Favorite, Share, ExpandLess, ExpandMore } from '@material-ui/icons';
+import { shoppingContext } from '../../hook/shopping';
 
 import useStyles from './styles';
 
 const Product = ({ product }) => {
+    const { addProducts } = useContext(shoppingContext);
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
 
@@ -27,20 +29,20 @@ const Product = ({ product }) => {
                 </div>
                 <Rating name="read-only" value={3} readOnly />
                 <Box display='flex' flexDirection='row-reverse'>
-                    <Chip label={`S/ ${product.price}`} style={{backgroundColor: '#3DADFF', color: 'white'}} />
+                    <Chip label={`S/ ${product.price}`} style={{ backgroundColor: '#3DADFF', color: 'white' }} />
                 </Box>
             </CardContent>
-            <CardActions display='flex' justifyContent='space-between'>
+            <CardActions display='flex'>
                 <Grid container justifyContent='space-between'>
                     <Box display={'flex'}>
                         <IconButton aria-label="add to favorites">
-                            <Favorite style={{color: 'red'}}/>
+                            <Favorite style={{ color: 'red' }} />
                         </IconButton>
-                        <IconButton aria-label="Add to cart">
-                            <ShoppingCart style={{color: '#3DADFF'}}/>
+                        <IconButton aria-label="Add to cart" onClick={() => addProducts(product)}>
+                            <ShoppingCart style={{ color: '#3DADFF' }} />
                         </IconButton>
                     </Box>
-                    <IconButton className={classes.rightAlignItem} aria-label="expand" onClick={handleExpandClick}>{expanded ? <ExpandMore style={{color: 'white'}}/> : <ExpandLess style={{color: 'white'}} />}</IconButton>
+                    <IconButton className={classes.rightAlignItem} aria-label="expand" onClick={handleExpandClick}>{expanded ? <ExpandMore style={{ color: 'black' }} /> : <ExpandLess style={{ color: 'black' }} />}</IconButton>
                 </Grid>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
