@@ -6,7 +6,7 @@ export default makeStyles(() => ({
         justifyContent: 'space-between'
     },
     root:{
-        marginTop: '25px',
+        marginTop: '55px',
         color: 'white'
     },
     label: {
