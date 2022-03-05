@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
@@ -10,32 +11,56 @@ import { shoppingContext } from '../../hook/shopping';
 
 export default function ShoppingCar() {
     const classes = useStyles();
-    const {shopping,removeProducts} = useContext(shoppingContext);
+    const { shopping, removeProducts } = useContext(shoppingContext);
+
+    console.log(shopping);
+
+    const getTotal = () => shopping.reduce((a, b) => a.price + b.price);
 
     return (
-        <Grid item xs={6} className={classes.root}>
-            <Grid container className={classes.header}>
-                <Grid item xs={4}><Typography className={classes.label}>Nombre</Typography></Grid>
-                <Grid item xs={2}><Typography className={classes.label}>Precio</Typography></Grid>
-                <Grid item xs={2}><Typography className={classes.label}>Cantidad</Typography></Grid>
-                <Grid item xs={2}><Typography className={classes.label}>Eliminar</Typography></Grid>
-            </Grid>
-            <Grid container justifyContent='center' alignItems='center'>
-                {shopping.map((item) =>
-                    <>
-                        <Grid container justifyContent='space-between' alignItems='center'>
-                            <Grid item xs={4}><Typography color='white'>{item.name}</Typography></Grid>
-                            <Grid item xs={2}><Typography className={classes.sublabel}>{item.price}</Typography></Grid>
-                            <Grid item xs={2}><Typography className={classes.sublabel}>10</Typography></Grid>
-                            <Grid item xs={2}><IconButton onClick={() => removeProducts(item)}><DeleteOutlineOutlinedIcon className={classes.icon} /></IconButton></Grid>
+        <Grid item xs={11} className={classes.root}>
+            <Grid container justifyContent='space-between'>
+                <Grid item xs={8}>
+                    {shopping.map((item, index) =>
+                        <Grid container justifyContent='space-between' key={index}>
+                            <Grid item xs={7}>
+                                {index === 0 && <Typography className={classes.label}>Producto</Typography>}
+                                <Box display='flex' alignItems='center'>
+                                    <img src={item.image} height='100px' width='100px' />
+                                    <Box ml={2}>
+                                        <Typography>{item.name}</Typography>
+                                        <Typography>{item.editorial}</Typography>
+                                    </Box>
+                                </Box>
+                            </Grid>
+                            <Grid item xs={2}>
+                                {index === 0 && <Typography align='center' className={classes.label}>Precio</Typography>}
+                                <Box className={classes.celda}><Typography align='center'>{item.price}</Typography></Box>
+                            </Grid>
+                            <Grid item xs={2}>
+                                {index === 0 && <Typography align='center' className={classes.label}>Accion</Typography>}
+                                <Box className={classes.celda}>
+                                    <IconButton onClick={() => removeProducts(item)}>
+                                        <DeleteOutlineOutlinedIcon className={classes.icon} />
+                                    </IconButton>
+                                </Box>
+                            </Grid>
+                            <Divider className={classes.divider} />
                         </Grid>
-                        <Divider className={classes.divider} />
-                    </>
-                )}
-            </Grid>
-            <Grid container className={classes.header}>
-                <Grid item xs={9}><Typography className={classes.label}>TOTAL A PAGAR</Typography></Grid>
-                <Grid item xs={2}><Button variant='contained' style={{backgroundColor: '#000e44', color: 'white'}}>Pagar</Button></Grid>
+                    )}
+                </Grid>
+                <Grid item xs={3}>
+                    <Box className={classes.card}>
+                        <Box className={classes.header}>
+                            <Typography className={classes.labelHeader}>RESUMEN</Typography>
+                        </Box>
+                        <Box className={classes.container}>
+                            <Typography className={classes.labelContainer}>Cantidad: {shopping.length}</Typography>
+                            {/* <Typography className={classes.labelContainer}>Total S/. : {getTotal()}</Typography> */}
+                            <Box display='flex'><Button className={classes.btn}>PAGAR</Button></Box>
+                        </Box>
+                    </Box>
+                </Grid>
             </Grid>
         </Grid>
     )

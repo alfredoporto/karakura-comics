@@ -9,12 +9,12 @@ const App = () => {
   const [shopping, setShopping] = useState([]);
 
   const addProducts = (item) => {
-    console.log("entro", shopping);
+    console.log("addProducts", shopping);
     setShopping((currentShopping) => [...currentShopping, item]);
   };
 
   const removeProducts = (item) => {
-    console.log("entro", shopping);
+    console.log("removeProducts", shopping);
     setShopping((currentShopping) => currentShopping.filter((element) => element.id !== item.id ));
   };
 

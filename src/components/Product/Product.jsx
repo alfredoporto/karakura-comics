@@ -7,13 +7,25 @@ import { shoppingContext } from '../../hook/shopping';
 import useStyles from './styles';
 
 const Product = ({ product }) => {
-    const { addProducts } = useContext(shoppingContext);
+    const { addProducts, removeProducts } = useContext(shoppingContext);
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
+    const [like, setLike] = useState(false);
+    const [shop, setShop] = useState(false);
+
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+
+    const handleShop = (producto) => {
+        console.log(shop);
+        if (shop)
+            removeProducts(producto);
+        else
+            addProducts(producto);
+        setShop(!shop);
+    }
 
     return (
         <Card className={classes.root}>
@@ -29,20 +41,20 @@ const Product = ({ product }) => {
                 </div>
                 <Rating name="read-only" value={3} readOnly />
                 <Box display='flex' flexDirection='row-reverse'>
-                    <Chip label={`S/ ${product.price}`} style={{ backgroundColor: '#3DADFF', color: 'white' }} />
+                    <Chip label={`S/ ${product.price}`} className={classes.price} />
                 </Box>
             </CardContent>
             <CardActions display='flex'>
                 <Grid container justifyContent='space-between'>
                     <Box display={'flex'}>
-                        <IconButton aria-label="add to favorites">
-                            <Favorite style={{ color: 'red' }} />
+                        <IconButton aria-label="add to favorites" onClick={() => setLike(!like)}>
+                            <Favorite className={like ? classes.likeActive : classes.likeDeactive} />
                         </IconButton>
-                        <IconButton aria-label="Add to cart" onClick={() => addProducts(product)}>
-                            <ShoppingCart style={{ color: '#3DADFF' }} />
+                        <IconButton aria-label="Add to cart" onClick={() => handleShop(product)}>
+                            <ShoppingCart className={shop ? classes.shopActive : classes.shopDeactive} />
                         </IconButton>
                     </Box>
-                    <IconButton className={classes.rightAlignItem} aria-label="expand" onClick={handleExpandClick}>{expanded ? <ExpandMore style={{ color: 'black' }} /> : <ExpandLess style={{ color: 'black' }} />}</IconButton>
+                    <IconButton className={classes.expand} aria-label="expand" onClick={handleExpandClick}>{expanded ? <ExpandMore /> : <ExpandLess />}</IconButton>
                 </Grid>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>

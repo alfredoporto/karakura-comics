@@ -5,9 +5,12 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Product from "../../components/Product/Product";
 import Sidebar from "../../components/Sidebar";
 import { getProducts } from "../../services/commerce";
+import useStyles from './styles';
+
 
 const Products = () => {
     const [productos, setProductos] = useState([]);
+    const classes = useStyles();
 
     useEffect(() => {
         async function getArrayProducts() {
@@ -28,10 +31,10 @@ const Products = () => {
                 <Grid item xs={2}>
                     <Sidebar />
                 </Grid>
-                <Grid item xs={10} style={{ marginTop: "15px", backgroundColor: "black" }}>
+                <Grid item xs={10} className={classes.root}>
                     {productos.length < 1 ?
-                        <Box display='flex' justifyContent="center" mt='250px'>
-                            <CircularProgress />
+                        <Box className={classes.containerLoad}>
+                            <CircularProgress className={classes.loader}/>
                         </Box>
                         :
                         <Grid container direction="row" justifyContent="space-between">
