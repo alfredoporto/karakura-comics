@@ -14,10 +14,6 @@ export default function Sidebar() {
     const { user, setUser } = useContext(userContext);
     const classes = useStyles();
 
-
-    console.log(pathname);
-    console.log(user);
-
     return (
         <Box className={classes.root}>
             <Box className={classes.logo}>

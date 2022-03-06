@@ -19,7 +19,6 @@ const Product = ({ product }) => {
     };
 
     const handleShop = (producto) => {
-        console.log(shop);
         if (shop)
             removeProducts(producto);
         else

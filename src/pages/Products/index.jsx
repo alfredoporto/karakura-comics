@@ -17,7 +17,6 @@ const Products = () => {
         async function getArrayProducts() {
             try {
                 const response = await getProducts();
-                console.log(response);
                 setProductos(response);
             } catch (error) {
                 setProductos([]);

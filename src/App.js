@@ -12,12 +12,10 @@ const App = () => {
   const providerUser = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   const addProducts = (item) => {
-    console.log("addProducts", shopping);
     setShopping((currentShopping) => [...currentShopping, item]);
   };
 
   const removeProducts = (item) => {
-    console.log("removeProducts", shopping);
     setShopping((currentShopping) => currentShopping.filter((element) => element.id !== item.id));
   };
 
