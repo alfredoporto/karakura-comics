@@ -11,8 +11,12 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "./styles.css";
 
-export default function Home() {
+import { login } from "../../services/login";
+import { useContext } from "react";
+import { userContext } from "../../hook/user";
 
+export default function Home() {
+    const { user, setUser } = useContext(userContext);
     return (
         <>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -28,6 +32,10 @@ export default function Home() {
                         </Badge>
                     </IconButton>
                     <IconButton
+                        onClick={async () => {
+                            const user = await login();
+                            setUser(user);
+                        }}
                         size="large"
                         aria-label="account of current user"
                         aria-controls="primary-search-account-menu"
