@@ -53,6 +53,16 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
+//se ejecutara antes de guardar el usuario en la bd
+userSchema.pre('save', async function (next) {
+    const user = this
+    if (user.isModified('password')) {
+        user.password = await bcrypt.hash(user.password, 8)
+    }
+
+    next()
+})
+
 userSchema.methods.generateAuthToken = async function () {
     const user = this
     const token = jwt.sign({ _id: user._id.toString() },
@@ -60,6 +70,21 @@ userSchema.methods.generateAuthToken = async function () {
     user.tokens = user.tokens.concat({ token })
     await user.save()
     return token
+}
+
+//para el login
+userSchema.statics.findByCredentials = async (email, password) => {
+    const user = await User.findOne({ email })
+    if (!user) {
+        throw new Error('No se ha encontrado usuario')
+    }
+    const isMatch = await bcrypt.compare(password, user.password)
+    console.log(isMatch)
+    if (!isMatch) {
+        throw new Error('Password no coincide')
+    }
+
+    return user
 }
 
 const User = mongoose.model('User', userSchema)
