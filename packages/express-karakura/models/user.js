@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const jwt = require('jsonwebtoken')
 /*
     Arreglo simple de passwords no recomendados, 
     creo que la lista es de 1k palabras
@@ -51,6 +52,15 @@ const userSchema = new mongoose.Schema({
 }, {
     timestamps: true
 })
+
+userSchema.methods.generateAuthToken = async function () {
+    const user = this
+    const token = jwt.sign({ _id: user._id.toString() },
+        process.env.JWT_SECRET)
+    user.tokens = user.tokens.concat({ token })
+    await user.save()
+    return token
+}
 
 const User = mongoose.model('User', userSchema)
 
