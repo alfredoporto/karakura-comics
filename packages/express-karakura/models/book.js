@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-
 /* 
     name: Stell Ball Run
     description: Esta es la historia de Jhonny ...
