@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 /*
     Arreglo simple de passwords no recomendados, 
     creo que la lista es de 1k palabras
