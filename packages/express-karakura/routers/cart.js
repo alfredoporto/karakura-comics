@@ -102,3 +102,5 @@ router.post("/cart", Auth, async (req, res) => {
         }
     });
 })
+
+module.exports = router
