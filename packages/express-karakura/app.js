@@ -1,11 +1,19 @@
 const express = require('express')
-require('./db/mongoose')
+const userRouter = require('./routers/user')
+const bookRouter = require('./routers/book')
+const cartRouter = require('./routers/cart')
 
-const app = express()
-app.use(express.json())
+require('./db/mongoose')
 
 const port = process.env.PORT
 
+const app = express()
+
+app.use(express.json())
+app.use(userRouter)
+app.use(bookRouter)
+app.use(cartRouter)
+
 app.listen(port, () => {
-  console.log('probando en puerto' + port)
+  console.log('server en: ' + port)
 })
