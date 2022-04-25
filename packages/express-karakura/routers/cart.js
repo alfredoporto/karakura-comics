@@ -5,7 +5,7 @@ const Auth = require("../middleware/auth");
 
 const router = new express.Router();
 
-router.get("/cart", Auth, async (req, res) => {
+router.get("/", Auth, async (req, res) => {
 
     const owner = req.user._id;
 
@@ -21,7 +21,7 @@ router.get("/cart", Auth, async (req, res) => {
     }
 });
 
-router.post("/cart", Auth, async (req, res) => {
+router.post("/", Auth, async (req, res) => {
 
     const owner = req.user._id;
     const { bookId, quantity } = req.body;
@@ -74,7 +74,7 @@ router.post("/cart", Auth, async (req, res) => {
         res.status(500).send("F");
     }
 
-    router.delete("/cart/", Auth, async (req, res) => {
+    router.delete("/", Auth, async (req, res) => {
         const owner = req.user._id;
         const bookId = req.query.bookId;
         try {

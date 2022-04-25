@@ -5,7 +5,7 @@ const Auth = require('../middleware/auth')
 const router = new express.Router()
 
 //nuevo usuario
-router.post('/users', async (req, res) => {
+router.post('/signup', async (req, res) => {
     const user = new User(req.body)
     try {
         await user.save()
@@ -17,7 +17,7 @@ router.post('/users', async (req, res) => {
 })
 
 //login
-router.post('/users/login', async (req, res) => {
+router.post('/signin', async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
@@ -28,7 +28,7 @@ router.post('/users/login', async (req, res) => {
 })
 
 // solo deslogea del dispositivo actual
-router.post('/users/logout', Auth, async (req, res) => {
+router.post('/logout', Auth, async (req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
@@ -41,7 +41,7 @@ router.post('/users/logout', Auth, async (req, res) => {
 })
 
 //deslogea de todos los demas dispositivos
-router.post('/users/logoutAll', Auth, async (req, res) => {
+router.post('/logoutAll', Auth, async (req, res) => {
     try {
         req.user.tokens = []
         await req.user.save()
