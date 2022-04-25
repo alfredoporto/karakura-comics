@@ -28,10 +28,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const newBook = new Book({
-            ...req.body,
-            owner: req.user._id
-        })
+        const newBook = new Book(req.body)
         await newBook.save()
         res.status(201).send(newBook)
     } catch (error) {
