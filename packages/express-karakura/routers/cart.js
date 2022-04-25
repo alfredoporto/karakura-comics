@@ -73,34 +73,34 @@ router.post("/", Auth, async (req, res) => {
         console.log(error);
         res.status(500).send("F");
     }
+});
 
-    router.delete("/", Auth, async (req, res) => {
-        const owner = req.user._id;
-        const bookId = req.query.bookId;
-        try {
-            let cart = await Cart.findOne({ owner });
-            const bookIndex = cart.books.findIndex((book) => book.bookId == bookId);
+router.delete("/", Auth, async (req, res) => {
+    const owner = req.user._id;
+    const bookId = req.query.bookId;
+    try {
+        let cart = await Cart.findOne({ owner });
+        const bookIndex = cart.books.findIndex((book) => book.bookId == bookId);
 
-            if (bookIndex > -1) {
-                let item = cart.books[bookIndex];
-                cart.bill -= item.quantity * item.price;
-                if (cart.bill < 0) {
-                    cart.bill = 0
-                }
-                cart.books.splice(bookIndex, 1);
-                cart.bill = cart.books.reduce((acc, curr) => {
-                    return acc + curr.quantity * curr.price;
-                }, 0)
-                cart = await cart.save();
-                res.status(200).send(cart);
-            } else {
-                res.status(404).send("libro no encontrado");
+        if (bookIndex > -1) {
+            let item = cart.books[bookIndex];
+            cart.bill -= item.quantity * item.price;
+            if (cart.bill < 0) {
+                cart.bill = 0
             }
-        } catch (error) {
-            console.log(error);
-            res.status(400).send();
+            cart.books.splice(bookIndex, 1);
+            cart.bill = cart.books.reduce((acc, curr) => {
+                return acc + curr.quantity * curr.price;
+            }, 0)
+            cart = await cart.save();
+            res.status(200).send(cart);
+        } else {
+            res.status(404).send("libro no encontrado");
         }
-    });
-})
+    } catch (error) {
+        console.log(error);
+        res.status(400).send();
+    }
+});
 
 module.exports = router
