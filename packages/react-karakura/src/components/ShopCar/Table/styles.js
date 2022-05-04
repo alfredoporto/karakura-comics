@@ -1,24 +1,28 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { BorderBottom } from "@material-ui/icons";
 
 export default makeStyles(() => ({
     root: {
         marginTop: '55px',
-        color: 'black'
+        color: 'black',
+        height: '100vh'
     },
     header: {
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         borderTopLeftRadius: '8px',
         borderTopRightRadius: '8px',
         padding: '15px 25px',
+        borderBottom: '1px solid black'
     },
-    labelHeader:{
-        color: 'white',
+    labelHeader: {
+        color: 'black',
         fontWeight: 'bold',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     label: {
-        fontSize: '20px',
-        marginBottom: '15px'
+        fontSize: '14px',
+        marginBottom: '15px',
+        color: 'white'
     },
     sublabel: {
         textAlign: 'center'
@@ -29,9 +33,9 @@ export default makeStyles(() => ({
     divider: {
         margin: '10px 10px',
         width: '100%',
-        borderColor: 'black'
+        backgroundColor: 'white'
     },
-    celda:{
+    celda: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -39,26 +43,35 @@ export default makeStyles(() => ({
     },
     card: {
         borderRadius: '8px',
-        border: '1px solid black',
+        border: '1px solid white',
         height: '250px',
+        backgroundColor: 'white'
     },
     container: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        height: '60%',
-        justifyContent: 'center',
-        padding: '10px 20px'
+        padding: '10px 20px',
+        backgroundColor: 'white'
     },
     labelContainer: {
         padding: '20px 10px',
         fontWeight: 'bold',
-        fontSize: '16px'
+        fontSize: '16px',
     },
-    btn: {
+    btnPagar: {
         backgroundColor: 'black',
         padding: '8px',
-        width: '100px',
+        color: 'white'
+    },
+    cesta: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%',
+        color: 'white'
+    },
+    iconAmount: {
         color: 'white'
     }
 }));
