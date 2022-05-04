@@ -1,44 +1,75 @@
-import { Link, useLocation } from "react-router-dom";
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
-import LocalMallIcon from '@material-ui/icons/LocalMall';
-import useStyles from './styles';
-import { userContext } from "../../hook/user";
-import { useContext } from "react";
 
-export default function Sidebar() {
+//import useState hook to create menu collapse state
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+//import react pro sidebar components
+import {
+    ProSidebar,
+    Menu,
+    MenuItem,
+    SidebarHeader,
+    SidebarFooter,
+    SidebarContent,
+} from "react-pro-sidebar";
+
+//import icons from react icons
+import ArrowRightOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
+import ArrowLeftOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
+import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import LocalMallIcon from '@material-ui/icons/LocalMall';
+import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
+
+//import sidebar css from react-pro-sidebar module and our custom css 
+import "react-pro-sidebar/dist/css/styles.css";
+import "./styles.css";
+
+
+const Sidebar = () => {
+    const [menuCollapse, setMenuCollapse] = useState(false);
     const { pathname } = useLocation();
-    const { user, setUser } = useContext(userContext);
-    const classes = useStyles();
+    let navigate = useNavigate();
+
+    const menuIconClick = () => {
+        menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
+    };
 
     return (
-        <Box className={classes.root}>
-            <Box className={classes.logo}>
-                <Box>
-                    <img width='130px' height='130px' src="./Images/Karakura.gif" />
-                </Box>
-            </Box>
-            <Box>
-                <Typography style={{ color: 'white' }}>Bievenido {user ? (user.username) : ("no saltarse el login xd")}</Typography>
-            </Box>
-            <Box component={Link} to={'/products'} className={pathname === '/products' ? classes.activeItem : classes.desactiveItem}>
-                <AssignmentIcon className={classes.icon} />
-                <Typography>Productos</Typography>
-            </Box>
-            <Box component={Link} to={'/shopping'} className={pathname === '/shopping' ? classes.activeItem : classes.desactiveItem}>
-                <LocalMallIcon className={classes.icon} />
-                <Typography>Carrito</Typography>
-            </Box>
-            <Box component={Link} to={'/'} className={classes.logout} >
-                <PowerSettingsNewIcon className={classes.iconLogout} onClick={() => {
-                    // llamar la backend el logout
-                    setUser(null)
-                }} />
-                <Typography>Cerrar sesión</Typography>
-            </Box>
-        </Box>
+        <>
+            <div id="header">
+                <ProSidebar collapsed={menuCollapse}>
+                    <SidebarHeader>
+                        <div className="logotext">
+                            <img width='80px' height='80px' src="./Images/Karakura-2.gif" onClick={menuIconClick} />
+                        </div>
+                        <div className="closemenu" onClick={menuIconClick}>
+                            {/* changing menu collapse icon on click */}
+                            {menuCollapse ? (
+                                <ArrowRightOutlinedIcon />
+                            ) : (
+                                <ArrowLeftOutlinedIcon />
+                            )}
+                        </div>
+                    </SidebarHeader>
+                    <SidebarContent>
+                        <Menu iconShape="square">
+                            <MenuItem active={pathname === '/products' ? true : false} icon={<HomeOutlinedIcon />} onClick={() => navigate("/products", { replace: true })}>
+                                Home
+                            </MenuItem>
+                            <MenuItem icon={<LocalMallIcon />} active={pathname === '/shopping' ? true : false} onClick={() => navigate("/shopping", { replace: true })}>Carrito</MenuItem>
+                            <MenuItem icon={<FavoriteOutlinedIcon />} >Favoritos</MenuItem>
+                        </Menu>
+                    </SidebarContent>
+                    <SidebarFooter>
+                        <Menu iconShape="square">
+                            <MenuItem icon={<ExitToAppOutlinedIcon />} onClick={() => navigate("/", { replace: true })}>Salir</MenuItem>
+                        </Menu>
+                    </SidebarFooter>
+                </ProSidebar>
+            </div>
+        </>
     );
-}
+};
+
+export default Sidebar;

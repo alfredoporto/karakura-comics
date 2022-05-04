@@ -1,113 +1,89 @@
-import { Link } from "react-router-dom";
-import Box from '@material-ui/core/Box';
-import Badge from '@material-ui/core/Badge';
-import IconButton from '@material-ui/core/IconButton';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination } from "swiper";
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
-import "./styles.css";
+import { useEffect, useState, useContext } from "react";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Card from "../../components/Books/Card";
+import CardLast from "../../components/Books/CardLast";
+import Sidebar from "../../components/Sidebar";
+import useStyles from './styles';
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import SearchIcon from '@material-ui/icons/Search';
+import HistoryIcon from '@material-ui/icons/History';
+import { userContext } from '../../hook/user';
+import { getBooks } from '../../services/products';
 
-import { login } from "../../services/login";
-import { useContext } from "react";
-import { userContext } from "../../hook/user";
+const Products = () => {
+    const [books, setBooks] = useState([]);
+    const [lastBooks, setLastBooks] = useState([]);
+    const { user } = useContext(userContext);
+    const classes = useStyles();
 
-export default function Home() {
-    const { user, setUser } = useContext(userContext);
+    useEffect(() => {
+        async function getAllBooks() {
+            try {
+                const response = await getBooks();
+                setBooks(response);
+                const size = response.length;
+                const last = response.slice(size-3,size);
+                setLastBooks(last);
+                console.log(response)
+            } catch (error) {
+                setBooks([]);
+                console.log(error);
+            }
+        }
+        getAllBooks();
+    }, []);
+
     return (
-        <>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Box><img width='180px' height='180px' src="./Images/Karakura.gif" /></Box>
-                <Box display={'flex'} justifyContent={'flex-end'} style={{ marginTop: '-45px' }}>
-                    <IconButton
-                        size="large"
-                        aria-label="show 17 new notifications"
-                        color="inherit"
-                    >
-                        <Badge badgeContent={3} color="error">
-                            <NotificationsIcon style={{ color: 'white', fontSize: '30px' }} />
-                        </Badge>
-                    </IconButton>
-                    <IconButton
-                        onClick={async () => {
-                            const user = await login();
-                            setUser(user);
-                        }}
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="primary-search-account-menu"
-                        aria-haspopup="true"
-                        color="inherit"
-                        component={Link}
-                        to={"/products"}
-                    >
-                        <AccountCircle style={{ color: 'white', fontSize: '30px' }} />
-                    </IconButton>
-                </Box>
-            </Box>
-            <Box className="main">
-                <Swiper
-                    effect={"coverflow"}
-                    grabCursor={true}
-                    centeredSlides={true}
-                    slidesPerView={"auto"}
-                    coverflowEffect={{
-                        rotate: 50,
-                        stretch: 0,
-                        depth: 100,
-                        modifier: 1,
-                        slideShadows: true,
+        <Grid container>
+            <Grid item xs={2}>
+                <Sidebar />
+            </Grid>
+            <Grid item xs={7} className={classes.root}>
+                <TextField
+                    className={classes.search}
+                    variant='outlined'
+                    size="small"
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton>
+                                    <SearchIcon />
+                                </IconButton>
+                            </InputAdornment>
+                        )
                     }}
-                    modules={[EffectCoverflow, Pagination]}
-                    className="mySwiper"
-                >
-                    <SwiperSlide>
-                        <img src="./Images/Login/1.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/2.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/3.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/4.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/5.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/6.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/7.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/8.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/9.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/10.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/11.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/12.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/13.jpeg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./Images/Login/14.jpeg" />
-                    </SwiperSlide>
-                </Swiper>
-            </Box>
-        </>
+                />
+                <Grid container direction="row" justifyContent="space-between">
+                    {books.map((product, index) => (
+                        <Grid key={index} item xs={6} sx={{ mb: 2 }}>
+                            <Card product={product} />
+                        </Grid>
+                    ))}
+                </Grid>
+            </Grid>
+            <Grid item xs={3} className={classes.sidebar}>
+                <Box className={classes.menuRight}>
+                    <img src="./Images/user.png" width='50px' />
+                    {/* <Typography className={classes.label}>{user.name.split('') || ''}</Typography> */}
+                    </Box>
+                <Box display='flex'>
+                    <Box className={classes.boxIcon}><HistoryIcon className={classes.iconHistory} /></Box>
+                    <Typography className={classes.label}>Ultimos Ingresos</Typography>
+                </Box>
+                <Divider className={classes.divider} />
+                {lastBooks.map((product, index) => (
+                    <Grid key={index} item sx={{ mb: 2 }}>
+                        <CardLast product={product} />
+                    </Grid>
+                ))}
+            </Grid>
+        </Grid>
     );
-}
+};
+
+export default Products;
